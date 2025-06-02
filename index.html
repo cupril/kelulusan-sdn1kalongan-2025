@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengumuman Kelulusan SD NEGERI 1 KALONGAN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for Inter font and specific colors if needed, though Tailwind mostly handles it */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Hide scrollbar for a cleaner look */
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-100 to-indigo-100 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white p-8 md:p-12 rounded-xl shadow-2xl text-center max-w-xl w-full transform transition-all duration-300 hover:scale-105">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-blue-800 mb-2">Pengumuman Kelulusan</h1>
+        <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">SD NEGERI 1 KALONGAN</h2>
+        <p class="text-md md:text-lg text-gray-600 mb-6">Tahun Pelajaran 2024/2025</p>
+        <p class="text-gray-700 mb-8 leading-relaxed">
+            Selamat datang di laman pengumuman kelulusan SD NEGERI 1 KALONGAN! Kami dengan bangga mengumumkan hasil kelulusan siswa/i kelas 6 Tahun Pelajaran 2024/2025. Setelah perjalanan belajar yang penuh dedikasi dan semangat, tiba saatnya untuk melihat hasil dari semua usaha keras yang telah dicurahkan.
+        </p>
+
+        <div class="space-y-6 mb-8">
+            <div class="text-left">
+                <label for="nama" class="block text-gray-700 text-sm font-bold mb-2">Nama Siswa:</label>
+                <input type="text" id="nama" placeholder="Masukkan Nama Lengkap" autocomplete="off" required
+                       class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 ease-in-out">
+            </div>
+            <div class="text-left">
+                <label for="nisn" class="block text-gray-700 text-sm font-bold mb-2">NISN:</label>
+                <input type="number" id="nisn" placeholder="Masukkan NISN Anda" autocomplete="off" required
+                       class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 ease-in-out">
+            </div>
+            <button onclick="checkStatus()"
+                    class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+                Cek Status Kelulusan
+            </button>
+        </div>
+
+        <div id="result" class="hidden mt-8 p-6 bg-blue-50 border border-blue-200 rounded-lg text-left shadow-inner">
+            </div>
+
+        <p class="text-sm text-gray-500 mt-10 border-t pt-6 border-gray-200 leading-relaxed">
+            *Jika ada perbedaan hasil pengumuman online dan manual, maka yang menjadi acuan adalah dokumen kelulusan yang telah disahkan dan ditandatangani oleh kepala sekolah.
+        </p>
+    </div>
+
+    <script>
+        // Student data as provided in the table
+        const studentData = [
+            { "NISN": "3125277401", "NAMA_SISWA": "AHMAD ASRORI", "TANGGAL_LAHIR": "2012-12-14", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0125653194", "NAMA_SISWA": "AHMAD DICKY FAJAR ARIYANTO", "TANGGAL_LAHIR": "2012-05-01", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0134437149", "NAMA_SISWA": "ALIEF MAULANA", "TANGGAL_LAHIR": "2013-01-25", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0135767830", "NAMA_SISWA": "ANINDYA ALFREDA SAPUTRI", "TANGGAL_LAHIR": "2013-01-08", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "3133811024", "NAMA_SISWA": "ARUMI PUSPITA SARI", "TANGGAL_LAHIR": "2013-07-10", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "0126334344", "NAMA_SISWA": "DAFFA JUANESA", "TANGGAL_LAHIR": "2012-06-11", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0139673100", "NAMA_SISWA": "DAI RIZAL EL RAFIF", "TANGGAL_LAHIR": "2013-03-30", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0133751239", "NAMA_SISWA": "HASNA KIRANA", "TANGGAL_LAHIR": "2013-05-21", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "3122803525", "NAMA_SISWA": "HIBBANA ADDIN ALIYA", "TANGGAL_LAHIR": "2012-09-30", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "3137365673", "NAMA_SISWA": "LITA KAROMIN", "TANGGAL_LAHIR": "2013-05-03", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "0133920926", "NAMA_SISWA": "MUHAMMAD AZKA WILDAN", "TANGGAL_LAHIR": "2013-01-13", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0122861172", "NAMA_SISWA": "MUHAMMAD BAGUS ADI PRATAMA", "TANGGAL_LAHIR": "2012-10-23", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0131897118", "NAMA_SISWA": "MUKHAMAD ALDI PERMATA MALIK", "TANGGAL_LAHIR": "2013-01-02", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0135540755", "NAMA_SISWA": "NAVISA KIRANA PUTRI", "TANGGAL_LAHIR": "2013-03-13", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "0132797157", "NAMA_SISWA": "QURTHUBI NAFI DIHARJO", "TANGGAL_LAHIR": "2013-01-11", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "3125106181", "NAMA_SISWA": "SHAFA SYIRA ALFYANI", "TANGGAL_LAHIR": "2012-07-23", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "0131402162", "NAMA_SISWA": "SITI NUR AZZIZAH", "TANGGAL_LAHIR": "2013-01-08", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "0139697322", "NAMA_SISWA": "WULAN AYU RAHMAWATI", "TANGGAL_LAHIR": "2013-02-25", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "0131882392", "NAMA_SISWA": "YAFIQ SA'DIKA AHMAD", "TANGGAL_LAHIR": "2013-02-07", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0122121100", "NAMA_SISWA": "MUHAMMAD KHOIRUL ANWAR", "TANGGAL_LAHIR": "2012-06-13", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0139030594", "NAMA_SISWA": "ALIYA SYIFA SYAFIRA", "TANGGAL_LAHIR": "2013-03-25", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "3125493123", "NAMA_SISWA": "ABID AL MAJID AFLAH ADIRA", "TANGGAL_LAHIR": "2012-06-29", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0127999567", "NAMA_SISWA": "AGUNG FIRMANSYAH", "TANGGAL_LAHIR": "2012-11-14", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0121586004", "NAMA_SISWA": "AHMAT NORKOLIS", "TANGGAL_LAHIR": "2012-10-11", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0129845579", "NAMA_SISWA": "AHMAT RIO WIJAYA", "TANGGAL_LAHIR": "2012-09-13", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0128577840", "NAMA_SISWA": "ALFIRA CHOIRUN NISA", "TANGGAL_LAHIR": "2012-05-03", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "0133716226", "NAMA_SISWA": "APRIL LEO DWI WIJAYANTO", "TANGGAL_LAHIR": "2013-04-06", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0128412863", "NAMA_SISWA": "DWI YULIANTI", "TANGGAL_LAHIR": "2012-07-11", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "0124009138", "NAMA_SISWA": "FAYZA RAHMIA PRATIWI", "TANGGAL_LAHIR": "2012-10-06", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "3132039738", "NAMA_SISWA": "GIONZA ABI YUSUF ADIRA", "TANGGAL_LAHIR": "2013-08-24", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0127524579", "NAMA_SISWA": "LATHISA PUTRI ALTHAFUNISA PURNAMA", "TANGGAL_LAHIR": "2012-08-01", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "0122987672", "NAMA_SISWA": "LATIFATUN NURUL FITRIYANA", "TANGGAL_LAHIR": "2012-08-16", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "0133082417", "NAMA_SISWA": "MUHAMMAD ALFARIS AFREYZA", "TANGGAL_LAHIR": "2013-06-02", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0133036441", "NAMA_SISWA": "MUHAMMAD FATICHUL AFHAM", "TANGGAL_LAHIR": "2013-04-28", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0127041251", "NAMA_SISWA": "MUHAMMAD FIRMAN", "TANGGAL_LAHIR": "2012-06-15", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0125367886", "NAMA_SISWA": "NATASYA DEVI EKA YUNITASARI", "TANGGAL_LAHIR": "2012-07-19", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "0133539933", "NAMA_SISWA": "NUR FEBRIANA SINTA SARI", "TANGGAL_LAHIR": "2013-02-23", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "0126099832", "NAMA_SISWA": "PUTRA TRI WALUYO", "TANGGAL_LAHIR": "2012-09-05", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0128592307", "NAMA_SISWA": "RADITYA PUTRA PRATAMA", "TANGGAL_LAHIR": "2012-10-17", "JENIS_KELAMIN": "L", "STATUS": "LULUS" },
+            { "NISN": "0132721264", "NAMA_SISWA": "SHIFA KAYLA AZZAHRA", "TANGGAL_LAHIR": "2013-03-14", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "0131397021", "NAMA_SISWA": "VALENSI AIREN DWI MARTA", "TANGGAL_LAHIR": "2013-03-19", "JENIS_KELAMIN": "P", "STATUS": "LULUS" },
+            { "NISN": "0129767653", "NAMA_SISWA": "MALIKA DEWI SEKAR ARUM", "TANGGAL_LAHIR": "2012-09-16", "JENIS_KELAMIN": "P", "STATUS": "LULUS" }
+        ];
+
+        // Function to check student status based on input
+        function checkStatus() {
+            const namaInput = document.getElementById('nama').value.trim().toUpperCase();
+            const nisnInput = document.getElementById('nisn').value.trim();
+            const resultDiv = document.getElementById('result');
+
+            // Hide previous result before displaying new one
+            resultDiv.classList.add('hidden');
+            resultDiv.innerHTML = ''; // Clear previous content
+
+            // Find student in the data array
+            const student = studentData.find(s => 
+                s.NAMA_SISWA.toUpperCase() === namaInput && s.NISN === nisnInput
+            );
+
+            if (student) {
+                // Display student details if found
+                resultDiv.innerHTML = `
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">Hasil Kelulusan:</h3>
+                    <p class="text-gray-800 mb-2"><strong class="text-blue-700">Nama:</strong> ${student.NAMA_SISWA}</p>
+                    <p class="text-gray-800 mb-2"><strong class="text-blue-700">NISN:</strong> ${student.NISN}</p>
+                    <p class="text-gray-800 mb-2"><strong class="text-blue-700">Tanggal Lahir:</strong> ${student.TANGGAL_LAHIR}</p>
+                    <p class="text-gray-800 mb-2"><strong class="text-blue-700">Jenis Kelamin:</strong> ${student.JENIS_KELAMIN === 'L' ? 'Laki-laki' : 'Perempuan'}</p>
+                    <p class="text-gray-800 mb-2"><strong class="text-blue-700">Status:</strong> <span class="text-green-600 font-extrabold text-xl">${student.STATUS}</span></p>
+                `;
+            } else {
+                // Display error message if not found
+                resultDiv.innerHTML = `
+                    <h3 class="text-2xl font-bold text-red-700 mb-4">Mohon Maaf,</h3>
+                    <p class="text-gray-800">Data siswa dengan Nama <strong class="text-red-600">${namaInput}</strong> dan NISN <strong class="text-red-600">${nisnInput}</strong> tidak ditemukan.</p>
+                    <p class="text-gray-800 mt-2">Pastikan nama dan NISN yang Anda masukkan sudah benar.</p>
+                `;
+            }
+            // Show the result div
+            resultDiv.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
+```javascript
+// Code.gs
+function doGet() {
+  // Serve the index.html file
+  return HtmlService.createTemplateFromFile('index').evaluate()
+      .setTitle('Pengumuman Kelulusan SD NEGERI 1 KALONGAN')
+      .addMetaTag('viewport', 'width=device-width, initial-scale=1.0');
+}
