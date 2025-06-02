@@ -137,14 +137,3 @@
             // Show the result div
             resultDiv.classList.remove('hidden');
         }
-    </script>
-</body>
-</html>
-```javascript
-// Code.gs
-function doGet() {
-  // Serve the index.html file
-  return HtmlService.createTemplateFromFile('index').evaluate()
-      .setTitle('Pengumuman Kelulusan SD NEGERI 1 KALONGAN')
-      .addMetaTag('viewport', 'width=device-width, initial-scale=1.0');
-}
